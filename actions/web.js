@@ -26,7 +26,7 @@ var Chat = {
         return http('get', 'http://requestb.in/1dko9sj1');
     },
 
-    getAccessToken: function (code, email) {
+    getAccessToken: function () {
         return http('get', 'http://requestb.in/1dko9sj1asd');
     }
 };

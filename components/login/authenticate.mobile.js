@@ -5,8 +5,7 @@
 'use strict';
 
 var Colors = require('../../styles/js/colors'),
-    History = require('../../actions/history'),
-    Chat = require('../../actions/chat'),
+    Web = require('../../actions/web'),
     _ = require('lodash');
 
 var { Text, TouchableOpacity, View, Alert, ScrollView, TextInput, ToolbarAndroid } = ReactNative;
@@ -15,18 +14,15 @@ let { styles, images } = React;
 var VerificationView = React.createClass({
 
     getInitialState: function() {
-        let email = this.props.email;
         return {
             code: '',
-            showLoadingOverlay: false,
-            email: email
         };
     },
 
     androidTopBar: function() {
         return (
             <ToolbarAndroid
-                title={ 'Enter Verification Code' }
+                title={ 'Enter Code' }
                 titleColor={ 'white' }
                 style={ styles.topBar.darkTopBar }
                 navIcon={ images.backWhite }
@@ -43,8 +39,8 @@ var VerificationView = React.createClass({
                 { this.androidTopBar() }
                 <View style={[{ flex: 1, padding: 8 }]}>
                     <View>
-                        <Text style={ styles.authenticate.label }>{ 'Look for your one-time authorization code in your email.' }</Text>
-                        <Text style={ styles.authenticate.label }>{ 'Authorization Code' }</Text>
+                        <Text style={ styles.authenticate.label }>{ 'Type something.' }</Text>
+                        <Text style={ styles.authenticate.label }>{ 'Here' }</Text>
                         <TextInput
                             keyboardType='numeric'
                             returnKeyType={ 'go' }
@@ -53,14 +49,6 @@ var VerificationView = React.createClass({
                             onChangeText={ this._textChanged }
                             onSubmitEditing={ this._submitCode }
                         />
-                        <View style={styles.authenticate.footerView}>
-                            <Text style={styles.authenticate.footerText}>{'Did not receive the email?'}</Text>
-                            <TouchableOpacity underlayColor={ Colors.clearColor }
-                                              activeOpacity={.2}
-                                              onPress={this._newCodeRequested }>
-                                <Text style={styles.authenticate.requestNewCode}>{'Request a new code.'}</Text>
-                            </TouchableOpacity>
-                        </View>
                     </View>
                 </View>
             </View>
@@ -75,17 +63,12 @@ var VerificationView = React.createClass({
         }
     },
 
-    _newCodeRequested: function() {
-        Chat.sendEmailVerificationCode(this.state.email);
-    },
-
     _submitCode: function(code) {
-        Chat.getAccessToken(code, this.state.email).then(this._handleAuthSuccess, this._handleAuthFailure);
+        Web.getAccessToken().then(this._handleAuthSuccess, this._handleAuthFailure);
     },
 
     _handleAuthSuccess: function(token) {
-        Chat.getUser(this.props.email)
-            .then(() => console.log('success'), () => console.log('failure'));
+        console.log('success');
     },
 
     _handleAuthFailure: function(xhr) {
