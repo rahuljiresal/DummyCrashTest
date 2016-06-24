@@ -1,0 +1,21 @@
+{
+  "name": "DummyCrashTest",
+  "version": "0.0.1",
+  "description": "Dummy crashing of Android React Native",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rahuljiresal/DummyCrashTest"
+  },
+  "dependencies": {
+    "events": "^1.1.1",
+    "flux": "^2.1.1",
+    "lodash": "^4.6.1",
+    "qwest": "^2.2.6",
+    "react": "^15.1.0",
+    "react-native": "^0.28.0"
+  }
+}
