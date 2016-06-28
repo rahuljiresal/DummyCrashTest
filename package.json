@@ -16,6 +16,6 @@
     "lodash": "^4.6.1",
     "qwest": "^2.2.6",
     "react": "^15.1.0",
-    "react-native": "^0.28.0"
+    "react-native": "github:facebook/react-native#master"
   }
 }
